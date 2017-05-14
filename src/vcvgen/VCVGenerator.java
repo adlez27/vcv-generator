@@ -14,6 +14,7 @@ public class VCVGenerator {
 		String[] vowels = vows.split(" ");
 		String[][] initVowelStrings = new String[vowels.length][vowels.length+1];
 		
+		// Constructing vowel strings
 		for (int i = 0; i < vowels.length; i++){
 			String[] vv = new String[vowels.length+1];
 			vv[0] = vowels[i];
@@ -27,6 +28,7 @@ public class VCVGenerator {
 			initVowelStrings[i] = vv;
 		}
 		
+		// Splitting vowel strings up
 		ArrayList<String[]> finVowelStrings = new ArrayList<String[]>();
 		for (String[] line : initVowelStrings){
 			int start = 0;
@@ -35,7 +37,8 @@ public class VCVGenerator {
 				finVowelStrings.add(line);
 			} else {
 				boolean first = true;
-				while (end <= line.length){
+				boolean last = false;
+				while (!last){
 					
 					if (first){
 						String[] firstBatch = new String[maxSyl];
@@ -43,8 +46,6 @@ public class VCVGenerator {
 							firstBatch[i] = line[i];
 						}
 						finVowelStrings.add(firstBatch);
-						start = end-1;
-						end = end + maxSyl-1;
 						first = false;
 					}
 					
@@ -54,16 +55,17 @@ public class VCVGenerator {
 							midBatch[j] = line[i];
 						}
 						finVowelStrings.add(midBatch);
-						start = end-1;
-						end = end + maxSyl-1;
 					} else {
 						String[] finBatch = new String[line.length-start];
 						for (int i = start, j = 0; i < line.length; i++, j++){
 							finBatch[j] = line[i];
 						}
 						finVowelStrings.add(finBatch);
-						break;
+						last = true;
 					}
+					
+					start = end-1;
+					end = end + maxSyl-1;
 				}
 			}
 		}
