@@ -64,7 +64,8 @@ public class VCVGenerator {
 						for (int i = start, j = 0; i < line.length; i++, j++){
 							finBatch[j] = line[i];
 						}
-						finVowelStrings.add(finBatch);
+						if (finBatch.length > 1)
+							finVowelStrings.add(finBatch);
 						last = true;
 					}
 				}
