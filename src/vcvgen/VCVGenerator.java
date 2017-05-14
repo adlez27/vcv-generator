@@ -46,6 +46,8 @@ public class VCVGenerator {
 							firstBatch[i] = line[i];
 						}
 						finVowelStrings.add(firstBatch);
+						start = end-1;
+						end = end + maxSyl-1;
 						first = false;
 					}
 					
@@ -55,6 +57,8 @@ public class VCVGenerator {
 							midBatch[j] = line[i];
 						}
 						finVowelStrings.add(midBatch);
+						start = end-1;
+						end = end + maxSyl-1;
 					} else {
 						String[] finBatch = new String[line.length-start];
 						for (int i = start, j = 0; i < line.length; i++, j++){
@@ -63,9 +67,6 @@ public class VCVGenerator {
 						finVowelStrings.add(finBatch);
 						last = true;
 					}
-					
-					start = end-1;
-					end = end + maxSyl-1;
 				}
 			}
 		}
@@ -198,5 +199,9 @@ public class VCVGenerator {
     	}
 		
 		return fn;
+	}
+	
+	public static void main(String[]args){
+		VCVGenerator.reclist("k","00 01 02 03 04 05 06 07 08 09 10 11 12 13 14", 7);
 	}
 }
