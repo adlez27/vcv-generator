@@ -194,11 +194,17 @@ public class VCVGenGUI implements ActionListener{
 			int tempo = Integer.parseInt(txtTempo.getText());
 			int dups = Integer.parseInt(txtMaxdups.getText());
 			
-			VCVGenerator.reclist(cons,vows,syls);
-			VCVGenerator.oto(off, tempo, dups);
-			
-			JOptionPane.showMessageDialog(null, "Done.", "VCV Generator", JOptionPane.INFORMATION_MESSAGE);
-		 	frame.dispose();
+			if (syls < 2){
+				JOptionPane.showMessageDialog(null, "Invalid number of syllables", "VCV Generator", JOptionPane.ERROR_MESSAGE);
+			} else if (tempo < 1){
+				JOptionPane.showMessageDialog(null, "Invalid tempo", "VCV Generator", JOptionPane.ERROR_MESSAGE);
+			}else {
+				VCVGenerator.reclist(cons,vows,syls);
+				VCVGenerator.oto(off, tempo, dups);
+				
+				JOptionPane.showMessageDialog(null, "Done.", "VCV Generator", JOptionPane.INFORMATION_MESSAGE);
+			 	frame.dispose();
+			}
 		}
 	}
 }
